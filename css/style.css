@@ -1,0 +1,136 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f3f3;
+}
+
+body::before {
+    content: ""; /* Necessário para aplicar estilos no pseudo-elemento */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../imagens/marca_dagua.jpeg'); /* Caminho correto da imagem */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: 0.1;
+    z-index: -1;
+}
+
+#game-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.game-stage {
+    display: none;
+}
+
+.game-stage:not(.hidden) {
+    display: block;
+}
+
+#start-screen {
+    position: relative;
+}
+
+#boca_dentes_sujos {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+#start-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 30px;
+    font-size: 20px;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    animation: bounce 2s infinite; /* Animação de bounce para o botão de iniciar */
+}
+
+#start-button:hover {
+    background-color: #45a049;
+}
+
+/* Animações */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translate(-50%, -50%);
+    }
+    40% {
+        transform: translate(-50%, calc(-50% - 15px));
+    }
+    60% {
+        transform: translate(-50%, calc(-50% - 7px));
+    }
+}
+
+.tool {
+    width: 80px;
+    height: 80px;
+    margin: 10px;
+    transition: transform 2.5s ease-out, opacity 2.5s ease-out;
+    opacity: 1;
+}
+
+.tool.moving {
+    transform: translate(0, 150px); /* Move a ferramenta até a boca */
+    opacity: 0;
+}
+
+#completion-stage {
+    text-align: center;
+}
+
+#completion-stage img {
+    width: 80%;
+    max-width: 600px;
+    margin: 20px 0;
+}
+
+#next-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: none; /* Inicialmente escondido */
+}
+
+#next-button:hover {
+    background-color: #45a049;
+}
+
+#restart-game {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    animation: bounce 2s infinite;
+}
+
+#restart-game:hover {
+    background-color: #e53935;
+}

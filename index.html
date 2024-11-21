@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dentinhos Felizes - Dental Care</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Tela inicial -->
+        <div id="start-screen" class="game-stage">
+            <img id="boca_dentes_sujos" src="imagens/boca_dentes_sujos.jpg" alt="Boca com dentes sujos">
+            <button id="start-button">Iniciar o Jogo</button>
+        </div>
+
+        <!-- Fase intermediária: Tratamento -->
+        <div id="dental-stage" class="game-stage hidden">
+            <h2>Vamos cuidar dos dentinhos!</h2>
+            <p id="instruction-message">Escove os dentes!</p>
+            <img id="dentes_sujos" src="imagens/boca_dentes_sujos.jpg" alt="Dentes sujos">
+            <div id="tools-container">
+                <img class="tool" id="escova" src="imagens/escova.jpg" alt="Escova" draggable="true">
+                <img class="tool" id="fio_dental" src="imagens/fio_dental.jpeg" alt="Fio Dental" draggable="true">
+                <img class="tool" id="enxaguante" src="imagens/dentinho_enxaguante.jpg" alt="Enxaguante" draggable="true">
+            </div>
+        </div>
+
+        <div id="completion-stage" class="game-stage hidden">
+            <h2>Parabéns!</h2>
+            <p>A boca está limpinha!!</p>
+            <img id="final-boca-img" src="imagens/boca_limpa.jpg" alt="Boca Limpa" style="max-width: 80%; margin: 20px 0;">
+            <p id="final-score">Sua pontuação total é: 0</p>
+            <button id="restart-game">Jogar Novamente</button>
+        </div>
+    </div>
+
+    <script src="js/game.js"></script>
+</body>
+</html>
+
