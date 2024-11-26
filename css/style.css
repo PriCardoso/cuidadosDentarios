@@ -1,3 +1,9 @@
+.hidden {
+    display: none;
+}
+
+
+/* Estilos globais */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
@@ -7,19 +13,21 @@ body {
 }
 
 body::before {
-    content: ""; /* Necessário para aplicar estilos no pseudo-elemento */
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../imagens/marca_dagua.jpeg'); /* Caminho correto da imagem */
+    background-image: url('../imagens/marca_dagua.jpg');
     background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    background-position: center center; /* Centraliza a imagem na tela */
+    background-size: contain; /* A imagem será ajustada para caber dentro da tela sem cortar */
     opacity: 0.1;
     z-index: -1;
 }
+
+
 
 #game-container {
     max-width: 800px;
@@ -27,23 +35,16 @@ body::before {
     padding: 20px;
 }
 
-.game-stage {
-    display: none;
-}
-
-.game-stage:not(.hidden) {
-    display: block;
+/* Tela de início */
+#start-message {
+    font-size: 1.5rem;
+    margin-top: 20px;
+    text-align: center;
+    color: #333;
 }
 
 #start-screen {
     position: relative;
-}
-
-#boca_dentes_sujos {
-    width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
 }
 
 #start-button {
@@ -58,14 +59,13 @@ body::before {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    animation: bounce 2s infinite; /* Animação de bounce para o botão de iniciar */
+    animation: bounce 2s infinite;
 }
 
 #start-button:hover {
     background-color: #45a049;
 }
 
-/* Animações */
 @keyframes bounce {
     0%, 20%, 50%, 80%, 100% {
         transform: translate(-50%, -50%);
@@ -78,19 +78,55 @@ body::before {
     }
 }
 
+/* Tela de escovação */
+#dentes_sujos {
+    display: block;
+    margin: 0 auto;
+    position: relative; /* Garante que a boca está posicionada corretamente */
+    max-width: 300px; /* Limita o tamanho da boca */
+    height: auto;
+    
+}
+
 .tool {
+    position: absolute; /* Necessário para permitir movimentação com gsap */
+    width: 80px; /* Define o tamanho consistente das ferramentas */
+    height: auto;
+}
+
+
+
+#tools-container {
+    display: flex;
+    flex-direction: column; /* Alinha as ferramentas uma abaixo da outra */
+    gap: 10px; /* Espaçamento entre as ferramentas */
+    margin-top: 20px;
+}
+
+
+
+/* Estilos de .tool */
+.tool {
+    position: absolute; /* Permite a movimentação das ferramentas */
     width: 80px;
     height: 80px;
     margin: 10px;
-    transition: transform 2.5s ease-out, opacity 2.5s ease-out;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
     opacity: 1;
+    cursor: pointer;
 }
 
+.tool:hover {
+    opacity: 0.8;
+}
+
+
 .tool.moving {
-    transform: translate(0, 150px); /* Move a ferramenta até a boca */
+    transform: translateY(200px); /* Ajuste para a animação de movimento */
     opacity: 0;
 }
 
+/* Tela de conclusão */
 #completion-stage {
     text-align: center;
 }
@@ -99,21 +135,6 @@ body::before {
     width: 80%;
     max-width: 600px;
     margin: 20px 0;
-}
-
-#next-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    display: none; /* Inicialmente escondido */
-}
-
-#next-button:hover {
-    background-color: #45a049;
 }
 
 #restart-game {
@@ -134,3 +155,159 @@ body::before {
 #restart-game:hover {
     background-color: #e53935;
 }
+
+/* Estilo do Modal de Erro */
+#error-modal {
+    display: none; /* Inicialmente escondido */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo semitransparente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Garantir que fica sobre outros elementos */
+}
+
+#error-modal.hidden {
+    display: none;
+}
+
+#close-modal {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+/* Estilo do Modal */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo semitransparente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Garantir que fica sobre outros elementos */
+}
+
+.modal-content {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+    max-width: 400px;
+    width: 90%;
+    animation: modalFadeIn 0.5s;
+}
+
+.modal-content p {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.modal-content button {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+    background-color: #45a049;
+}
+
+/* Animação de entrada */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Ocultar quando tiver a classe "hidden" */
+.hidden {
+    display: none;
+}
+
+#fireworks-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999; /* Sobre todos os elementos */
+}
+
+.firework {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #ff0;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(255, 255, 0, 0.8);
+    opacity: 1;
+}
+
+.tool {
+    position: absolute;
+    left: 20px; /* Alinha as ferramentas no lado esquerdo */
+}
+
+#dental-stage {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+#final-score {
+    position: absolute;
+    top: 85%;  /* Ajuste a posição vertical */
+    left: 50%; /* Ajuste a posição horizontal */
+    transform: translate(-50%, -50%);  /* Centraliza o elemento */
+    font-size: 24px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1rem;
+    z-index: 100;
+}
+
+footer p {
+    margin: 0;
+}
+

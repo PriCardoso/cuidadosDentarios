@@ -8,9 +8,12 @@
 </head>
 <body>
     <div id="game-container">
-        <!-- Tela inicial -->
+        <!-- Tela de Início -->
         <div id="start-screen" class="game-stage">
+            <h2 id="start-message">Bem-vindo ao jogo de cuidados dentais! Clique no botão para começar.</h2>
+
             <img id="boca_dentes_sujos" src="imagens/boca_dentes_sujos.jpg" alt="Boca com dentes sujos">
+            
             <button id="start-button">Iniciar o Jogo</button>
         </div>
 
@@ -18,24 +21,55 @@
         <div id="dental-stage" class="game-stage hidden">
             <h2>Vamos cuidar dos dentinhos!</h2>
             <p id="instruction-message">Escove os dentes!</p>
+
             <img id="dentes_sujos" src="imagens/boca_dentes_sujos.jpg" alt="Dentes sujos">
-            <div id="tools-container">
-                <img class="tool" id="escova" src="imagens/escova.jpg" alt="Escova" draggable="true">
-                <img class="tool" id="fio_dental" src="imagens/fio_dental.jpeg" alt="Fio Dental" draggable="true">
-                <img class="tool" id="enxaguante" src="imagens/dentinho_enxaguante.jpg" alt="Enxaguante" draggable="true">
+
+            <div class="tools">
+                <img id="escova" class="tool" src="imagens/escova.jpg" draggable="true" alt="Escova de dentes" />
+                <img id="fio-dental" class="tool" src="imagens/fio_dental.jpeg" draggable="true" alt="Fio dental" />
+                <img id="enxaguante" class="tool" src="imagens/dentinho_enxaguante.jpg" draggable="true" alt="Enxaguante bucal" />
             </div>
         </div>
 
-        <div id="completion-stage" class="game-stage hidden">
+        <!-- Tela de Conclusão -->
+        <div id="completion-stage" class="hidden">
             <h2>Parabéns!</h2>
             <p>A boca está limpinha!!</p>
             <img id="final-boca-img" src="imagens/boca_limpa.jpg" alt="Boca Limpa" style="max-width: 80%; margin: 20px 0;">
-            <p id="final-score">Sua pontuação total é: 0</p>
+
+            <p id="final-score" class="hidden">Sua pontuação total é: 0</p>
+
             <button id="restart-game">Jogar Novamente</button>
+
+            
         </div>
+        
+
+        <!-- Modal de erro -->
+        <div id="error-modal" class="hidden">
+            <div class="modal-content">
+                <p id="modal-error-message"></p>
+                <button id="close-modal">OK</button>
+            </div>
+        </div> 
+
+        <div id="fireworks-container"></div>
+
     </div>
 
+    <!-- Footer -->
+<footer>
+    <p>&copy; 2024 Dentinhos Felizes - Todos os direitos reservados.</p>
+    <p>Desenvolvido por: Priscila Ap. B. Cardoso</p>
+</footer>
+
+
     <script src="js/game.js"></script>
+
+    <!-- Incluindo a biblioteca GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+
+    <p id="final-score-debug"></p>
+
 </body>
 </html>
-
